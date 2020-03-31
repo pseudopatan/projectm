@@ -15,6 +15,8 @@
 #include <iostream>
 #include <chrono>
 #include <ctime>
+#include <ft2build.h>
+#include FT_FREETYPE_H
 
 Pipeline* Renderer::currentPipe;
 
@@ -23,7 +25,6 @@ using namespace std::chrono;
 class Preset;
 
 #ifdef USE_TEXT_MENU
-
 
 void Renderer::drawText(const char* string, GLfloat x, GLfloat y, GLfloat scale,
                         int horizontalAlignment = GLT_LEFT, int verticalAlignment = GLT_TOP)
@@ -34,7 +35,8 @@ void Renderer::drawText(const char* string, GLfloat x, GLfloat y, GLfloat scale,
 void Renderer::drawText(GLTtext* text, const char* string, GLfloat x, GLfloat y, GLfloat scale,
                         int horizontalAlignment = GLT_LEFT, int verticalAlignment = GLT_TOP)
 {
-	// Initialize glText
+	/*
+    // Initialize glText
 	gltInit();
 
 	// Creating text
@@ -65,8 +67,89 @@ void Renderer::drawText(GLTtext* text, const char* string, GLfloat x, GLfloat y,
 
 	// Destroy glText
 	gltTerminate();
+     */
+    
+
 }
 
+std::map<GLchar, Character> Renderer::ConvertFont(const char* font){
+    // Init Freetype
+    FT_Library ft;
+    if (FT_Init_FreeType(&ft))
+        std::cout << "ERROR::FREETYPE: Could not init FreeType Library" << std::endl;
+
+    FT_Face face;
+    if (FT_New_Face(ft, font, 0, &face))
+        std::cout << "ERROR::FREETYPE: Failed to load font: " << font << std::endl;
+    
+    FT_Set_Pixel_Sizes(face, 0, 48);
+    
+    std::map<GLchar, Character> Characters;
+    
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 1); // Disable byte-alignment restriction
+    
+    FT_CharMap  found = 0;
+    FT_CharMap  charmap;
+    int         n;
+
+
+    for ( n = 0; n < face->num_charmaps; n++ )
+    {
+      charmap = face->charmaps[n];
+      if ( charmap->platform_id == 3 &&
+           charmap->encoding_id == 1 ) // Looking for Unicode charmap
+      {
+        found = charmap;
+        break;
+      }
+    }
+
+    //if ( !found ) { ... }
+
+    /* now, select the charmap for the face object */
+    //error = FT_Set_Charmap( face, found );
+    //if ( error ) { ... }
+      
+    for (GLuint c = 0; c < 65535; c++)
+    {
+        // Load character glyph
+        if (FT_Load_Char(face, c, FT_LOAD_RENDER))
+        {
+            std::cout << "ERROR::FREETYTPE: Failed to load Glyph" << std::endl;
+            continue;
+        }
+        // Generate texture
+        GLuint texture;
+        glGenTextures(1, &texture);
+        glBindTexture(GL_TEXTURE_2D, texture);
+        glTexImage2D(
+            GL_TEXTURE_2D,
+            0,
+            GL_RED,
+            face->glyph->bitmap.width,
+            face->glyph->bitmap.rows,
+            0,
+            GL_RED,
+            GL_UNSIGNED_BYTE,
+            face->glyph->bitmap.buffer
+        );
+        // Set texture options
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        // Now store character for later use
+        Character character = {
+            texture,
+            glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap.rows),
+            glm::ivec2(face->glyph->bitmap_left, face->glyph->bitmap_top),
+            (GLuint)face->glyph->advance.x
+        };
+        Characters.insert(std::pair<GLchar, Character>(c, character));
+    }
+    
+    return Characters;
+}
 
 #endif /** USE_TEXT_MENU */
 
@@ -75,7 +158,7 @@ Renderer::Renderer(int width, int height, int gx, int gy, BeatDetect* _beatDetec
 	mesh(gx, gy), m_presetName("None"), m_datadir(datadir), vw(width), vh(height),
 	title_fontURL(_titlefontURL), menu_fontURL(_menufontURL), presetURL(_presetURL)
 {
-	this->totalframes = 1;
+    this->totalframes = 1;
 	this->lastTime = duration_cast<milliseconds>(system_clock::now().time_since_epoch());
 	this->currentTime = duration_cast<milliseconds>(system_clock::now().time_since_epoch());
 	this->noSwitch = false;
@@ -94,9 +177,14 @@ Renderer::Renderer(int width, int height, int gx, int gy, BeatDetect* _beatDetec
 
 	//this->title = "Unknown";
 
+#ifdef USE_TEXT_MENU
+        this->menuCharacters = this->ConvertFont(menu_fontURL.c_str());
+#endif
+    
 	/** Other stuff... */
 	this->correction = true;
 
+    
 	/// @bug put these on member init list
 	this->textureManager = nullptr;
 	this->beatDetect = _beatDetect;
@@ -210,6 +298,8 @@ Renderer::Renderer(int width, int height, int gx, int gy, BeatDetect* _beatDetec
 
 	glBindVertexArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
+    
+    
 }
 
 std::string Renderer::SetPipeline(Pipeline& pipeline)
@@ -583,7 +673,7 @@ void Renderer::draw_help()
 	         "UP: Increase Beat Sensitivity""\n"
 	         "DOWN: Decrease Beat Sensitivity""\n"
 	         "CTRL-F: Fullscreen", 30, 20, 2.5);
-
+    std::cout << "How many times?" << std::endl;
 #endif /** USE_TEXT_MENU */
 }
 

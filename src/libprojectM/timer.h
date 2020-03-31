@@ -42,7 +42,7 @@
 
 #ifndef WIN32
 #include <sys/time.h>
-unsigned int getTicks( struct timeval *start );
+long getTicks( struct timeval *start );
 
 extern "C" {
 typedef int (*fspec_gettimeofday)(struct timeval *tv, struct timezone *tz);

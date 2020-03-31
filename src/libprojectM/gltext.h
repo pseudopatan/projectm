@@ -46,7 +46,7 @@
 extern "C" {
 #endif
 
-#if !defined(__gl_h_) && !defined(__glcorearb_h_) && !defined(USE_GLES)
+#if !defined(__gl_h_) && !defined(__glcorearb_h_) && !defined(USE_GLES) && !defined(__gl3_h_)
 #	error OpenGL header must be included prior to including glText header
 #endif
 

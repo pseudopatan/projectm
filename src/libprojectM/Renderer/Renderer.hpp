@@ -37,6 +37,12 @@ typedef struct
     float rad, ang;         // STATIC
 } composite_shader_vertex;
 
+struct Character {
+    GLuint     TextureID;  // ID handle of the glyph texture
+    glm::ivec2 Size;       // Size of glyph
+    glm::ivec2 Bearing;    // Offset from baseline to left/top of glyph
+    GLuint     Advance;    // Offset to advance to next glyph
+};
 
 class Texture;
 class BeatDetect;
@@ -116,7 +122,12 @@ private:
                    int verticalAlignment);
   void drawText(const char* string, GLfloat x, GLfloat y, GLfloat scale, int horizontalAlignment,
                    int verticalAlignment);
-
+  
+    std::map<GLchar, Character>  titleCharacters;
+    std::map<GLchar, Character>  menuCharacters;
+    
+    std::map<GLchar, Character> ConvertFont(const char* font);
+    
 #endif /** USE_TEXT_MENU */
   RenderContext renderContext;
   //per pixel equation variables

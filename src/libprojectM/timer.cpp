@@ -53,9 +53,9 @@ struct timeval GetCurrentTime() {
     return now;
     }
 
-unsigned int getTicks( struct timeval *start ) {
+long getTicks( struct timeval *start ) {
     struct timeval now;
-    unsigned int ticks;
+    long ticks;
 
     projectm_gettimeofday(&now, NULL);
     ticks=(now.tv_sec-start->tv_sec)*1000+(now.tv_usec-start->tv_usec)/1000;

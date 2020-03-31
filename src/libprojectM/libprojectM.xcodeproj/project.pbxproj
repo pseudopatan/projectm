@@ -1012,9 +1012,29 @@
 					/Library/Frameworks,
 					"$(LOCAL_LIBRARY_DIR)/Frameworks",
 				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"GL_SILENCE_DEPRECATION=1",
+					"USE_THREADS=1",
+					"USE_TEXT_MENU=1",
+				);
 				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
 					"DATADIR_PATH=\\\"\".\"\\\"",
 					"$(inherited)",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../../mac",
+					"$(SRCROOT)/../..",
+					"$(SRCROOT)/Renderer",
+					"$(SRCROOT)/",
+					"$(inherited)",
+					/usr/local/include,
+					"$(SRCROOT)/Renderer/hlslparser/src",
+					"/usr/local/include/freetype2/**",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"/usr/local/lib/**",
+					/Library/Frameworks,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -1033,6 +1053,20 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DATADIR_PATH=\\\"\"/usr/local/share/projectM\"\\\"",
 					"$(inherited)",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../../mac",
+					"$(SRCROOT)/../..",
+					"$(SRCROOT)/Renderer",
+					"$(SRCROOT)/",
+					"$(inherited)",
+					/usr/local/include,
+					"$(SRCROOT)/Renderer/hlslparser/src",
+					"/usr/local/include/freetype2/**",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"/usr/local/lib/**",
+					/Library/Frameworks,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

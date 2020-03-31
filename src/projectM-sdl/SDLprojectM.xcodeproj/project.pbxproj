@@ -17,6 +17,7 @@
 		168F715921124C0E001806E7 /* config.inp in Support files */ = {isa = PBXBuildFile; fileRef = 16B52AAA21105A6900830F34 /* config.inp */; };
 		168F715A21124C14001806E7 /* fonts in Support files */ = {isa = PBXBuildFile; fileRef = C3D30B8F1BF02BE5009AAACD /* fonts */; };
 		168F718021126256001806E7 /* AppIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = 168F717F21126256001806E7 /* AppIcon.icns */; };
+		9F6B29FF2432E6C20052D08A /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F6B29FE2432E5FA0052D08A /* libfreetype.a */; };
 		C345215C1BF025A9001707D2 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C345215B1BF025A9001707D2 /* OpenGL.framework */; };
 		C345215E1BF025CF001707D2 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C345215D1BF025CF001707D2 /* CoreFoundation.framework */; };
 		C34521651BF025E5001707D2 /* libbz2.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C345215F1BF025E5001707D2 /* libbz2.a */; };
@@ -145,6 +146,8 @@
 		169501FF1F7009E9008FAF86 /* pmSDL.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = pmSDL.hpp; sourceTree = "<group>"; };
 		16B52AA8211054E900830F34 /* projectMSDL-pkg.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "projectMSDL-pkg.plist"; sourceTree = "<group>"; };
 		16B52AAA21105A6900830F34 /* config.inp */ = {isa = PBXFileReference; lastKnownFileType = text; path = config.inp; sourceTree = "<group>"; };
+		9F6B29FD2432E5DF0052D08A /* usr */ = {isa = PBXFileReference; lastKnownFileType = folder; name = usr; path = ../../../../../../../usr; sourceTree = "<group>"; };
+		9F6B29FE2432E5FA0052D08A /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreetype.a; path = ../../../../../../../usr/local/lib/libfreetype.a; sourceTree = "<group>"; };
 		C307DFD31D565B57002F6B9E /* presets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = presets; path = ../../presets; sourceTree = "<group>"; };
 		C34521441BF02294001707D2 /* SDLprojectM */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SDLprojectM; sourceTree = BUILT_PRODUCTS_DIR; };
 		C345214E1BF022A5001707D2 /* projectM_SDL_main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = projectM_SDL_main.cpp; sourceTree = SOURCE_ROOT; };
@@ -175,6 +178,7 @@
 				C34521651BF025E5001707D2 /* libbz2.a in Frameworks */,
 				C34521691BF025E5001707D2 /* libpng15.a in Frameworks */,
 				C345216A1BF025E5001707D2 /* libz.a in Frameworks */,
+				9F6B29FF2432E6C20052D08A /* libfreetype.a in Frameworks */,
 				1612C997207A80A200862A3A /* libprojectM.a in Frameworks */,
 				1612C998207A80A200862A3A /* libRenderer.a in Frameworks */,
 			);
@@ -186,6 +190,8 @@
 		161070CE1F7041B0001905AB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9F6B29FE2432E5FA0052D08A /* libfreetype.a */,
+				9F6B29FD2432E5DF0052D08A /* usr */,
 				C345215D1BF025CF001707D2 /* CoreFoundation.framework */,
 				C345215B1BF025A9001707D2 /* OpenGL.framework */,
 			);
@@ -484,6 +490,10 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "projectM-SDL/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
@@ -511,6 +521,10 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "projectM-SDL/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
@@ -578,7 +592,10 @@
 					/usr/local/include,
 				);
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/ @loader_path/Frameworks/";
-				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../projectM-iTunes/macos/contrib";
+				LIBRARY_SEARCH_PATHS = (
+					"/usr/local/lib/**",
+					"$(SRCROOT)/../projectM-iTunes/macos/contrib",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -632,7 +649,10 @@
 					/usr/local/include,
 				);
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/ @loader_path/Frameworks/";
-				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../projectM-iTunes/macos/contrib";
+				LIBRARY_SEARCH_PATHS = (
+					"/usr/local/lib/**",
+					"$(SRCROOT)/../projectM-iTunes/macos/contrib",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_CFLAGS = "-DDATADIR_PATH='\"/usr/local/share/projectM\"'";
@@ -645,17 +665,23 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				GCC_LINK_WITH_DYNAMIC_LIBRARIES = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../libprojectM",
 					/usr/local/include,
 					"$(SRCROOT)/../../mac",
+					"/Library/Framework/**",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/projectM-SDL/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "@executable_path/ @loader_path/../Frameworks/ @loader_path/Frameworks/";
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/ @loader_path/../Frameworks/ /Library/Frameworks/ @loader_path/Frameworks/";
 				LIBRARY_SEARCH_PATHS = (
 					"$(SRCROOT)/../projectM-iTunes/macos/contrib",
 					/usr/local/lib,
+					"/Library/Frameworks/**",
 				);
 				OTHER_LDFLAGS = "-lSDL2";
 				PRODUCT_BUNDLE_IDENTIFIER = net.projectm.sdl;
@@ -671,17 +697,23 @@
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
 				GCC_LINK_WITH_DYNAMIC_LIBRARIES = YES;
 				HEADER_SEARCH_PATHS = (
 					"$(SRCROOT)/../libprojectM",
 					/usr/local/include,
 					"$(SRCROOT)/../../mac",
+					"/Library/Framework/**",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/projectM-SDL/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "@executable_path/ @loader_path/../Frameworks/ @loader_path/Frameworks/";
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/ @loader_path/../Frameworks/ /Library/Frameworks/ @loader_path/Frameworks/";
 				LIBRARY_SEARCH_PATHS = (
 					"$(SRCROOT)/../projectM-iTunes/macos/contrib",
 					/usr/local/lib,
+					"/Library/Frameworks/**",
 				);
 				OTHER_LDFLAGS = "-lSDL2";
 				PRODUCT_BUNDLE_IDENTIFIER = net.projectm.sdl;
