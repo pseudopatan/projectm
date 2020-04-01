@@ -49,7 +49,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(MSBuildThisFileDirectory);$(MSBuildThisFileDirectory)../src\libprojectM\Renderer;$(MSBuildThisFileDirectory)../src\libprojectM\NativePresetFactory;$(MSBuildThisFileDirectory)../src\libprojectM\MilkdropPresetFactory;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(MSBuildThisFileDirectory)packages\freetype.2.8.0.1\build\native\include;$(MSBuildThisFileDirectory);$(MSBuildThisFileDirectory)../src\libprojectM\Renderer;$(MSBuildThisFileDirectory)../src\libprojectM\NativePresetFactory;$(MSBuildThisFileDirectory)../src\libprojectM\MilkdropPresetFactory;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions)</AdditionalOptions>
       <AssemblerListingLocation>Debug/</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -84,7 +84,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>$(MSBuildThisFileDirectory);$(MSBuildThisFileDirectory)../src\libprojectM\Renderer;$(MSBuildThisFileDirectory)../src\libprojectM\NativePresetFactory;$(MSBuildThisFileDirectory)../src\libprojectM\MilkdropPresetFactory;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(MSBuildThisFileDirectory)packages\freetype.2.8.0.1\build\native\include;$(MSBuildThisFileDirectory);$(MSBuildThisFileDirectory)../src\libprojectM\Renderer;$(MSBuildThisFileDirectory)../src\libprojectM\NativePresetFactory;$(MSBuildThisFileDirectory)../src\libprojectM\MilkdropPresetFactory;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions)</AdditionalOptions>
       <AssemblerListingLocation>Release/</AssemblerListingLocation>
       <CompileAs>CompileAsCpp</CompileAs>

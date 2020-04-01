@@ -51,12 +51,6 @@
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LibraryPath>$(MSBuildProjectDirectory)packages\freetype.redist.2.8.0.1\build\native\bin\x64\v141\dynamic\Release;$(LibraryPath)</LibraryPath>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LibraryPath>$(MSBuildProjectDirectory)packages\freetype.redist.2.8.0.1\build\native\bin\x64\v141\dynamic\Release;$(LibraryPath)</LibraryPath>
-  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <AdditionalIncludeDirectories>$(MSBuildThisFileDirectory)../src\libprojectM;$(MSBuildThisFileDirectory);$(MSBuildThisFileDirectory)../src\libprojectM\Renderer;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -88,8 +82,8 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>libprojectM\Debug\projectM.lib;opengl32.lib;glu32.lib;NativePresetFactory\Debug\NativePresetFactory.lib;MilkdropPresetFactory\Debug\MilkdropPresetFactory.lib;Renderer\Debug\Renderer.lib;opengl32.lib;glu32.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libprojectM\Debug\projectM.lib;opengl32.lib;glu32.lib;NativePresetFactory\Debug\NativePresetFactory.lib;MilkdropPresetFactory\Debug\MilkdropPresetFactory.lib;Renderer\Debug\Renderer.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;$(MSBuildProjectDirectory)\packages\freetype.2.8.0.1\build\native\lib\x64\v141\dynamic\Release\freetype28.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(VC_LibraryPath_x86);$(VC_LibraryPath_x64);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
@@ -132,9 +126,8 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>
-      </AdditionalDependencies>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libprojectM\Debug\projectM.lib;opengl32.lib;glu32.lib;NativePresetFactory\Debug\NativePresetFactory.lib;MilkdropPresetFactory\Debug\MilkdropPresetFactory.lib;Renderer\Debug\Renderer.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib;$(MSBuildProjectDirectory)\packages\freetype.2.8.0.1\build\native\lib\x64\v141\dynamic\Release\freetype28.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(VC_LibraryPath_x86);$(VC_LibraryPath_x64);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>

@@ -15,8 +15,6 @@
 #include <iostream>
 #include <chrono>
 #include <ctime>
-#include <ft2build.h>
-#include FT_FREETYPE_H
 
 Pipeline* Renderer::currentPipe;
 
@@ -72,7 +70,7 @@ void Renderer::drawText(GLTtext* text, const char* string, GLfloat x, GLfloat y,
 
 }
 
-std::map<GLchar, Character> Renderer::ConvertFont(const char* font){
+FT_Face Renderer::LoadFont(const char* font){
     // Init Freetype
     FT_Library ft;
     if (FT_Init_FreeType(&ft))
@@ -84,9 +82,9 @@ std::map<GLchar, Character> Renderer::ConvertFont(const char* font){
     
     FT_Set_Pixel_Sizes(face, 0, 48);
     
-    std::map<GLchar, Character> Characters;
+    //std::map<GLchar, Character> Characters;
     
-    glPixelStorei(GL_UNPACK_ALIGNMENT, 1); // Disable byte-alignment restriction
+    //glPixelStorei(GL_UNPACK_ALIGNMENT, 1); // Disable byte-alignment restriction
     
     FT_CharMap  found = 0;
     FT_CharMap  charmap;
@@ -109,7 +107,7 @@ std::map<GLchar, Character> Renderer::ConvertFont(const char* font){
     /* now, select the charmap for the face object */
     //error = FT_Set_Charmap( face, found );
     //if ( error ) { ... }
-      
+		/*  
     for (GLuint c = 0; c < 65535; c++)
     {
         // Load character glyph
@@ -147,8 +145,9 @@ std::map<GLchar, Character> Renderer::ConvertFont(const char* font){
         };
         Characters.insert(std::pair<GLchar, Character>(c, character));
     }
+	*/
     
-    return Characters;
+    return face;
 }
 
 #endif /** USE_TEXT_MENU */
@@ -178,7 +177,7 @@ Renderer::Renderer(int width, int height, int gx, int gy, BeatDetect* _beatDetec
 	//this->title = "Unknown";
 
 #ifdef USE_TEXT_MENU
-        this->menuCharacters = this->ConvertFont(menu_fontURL.c_str());
+        this->menuCharacters = this->LoadFont(menu_fontURL.c_str());
 #endif
     
 	/** Other stuff... */

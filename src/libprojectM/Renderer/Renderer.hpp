@@ -13,6 +13,8 @@
 #include <iostream>
 #include <chrono>
 #include <ctime>
+#include <ft2build.h>
+#include FT_FREETYPE_H
 
 using namespace std::chrono;
 
@@ -123,10 +125,10 @@ private:
   void drawText(const char* string, GLfloat x, GLfloat y, GLfloat scale, int horizontalAlignment,
                    int verticalAlignment);
   
-    std::map<GLchar, Character>  titleCharacters;
-    std::map<GLchar, Character>  menuCharacters;
+  FT_Face titleCharacters;
+  FT_Face menuCharacters;
     
-    std::map<GLchar, Character> ConvertFont(const char* font);
+  FT_Face LoadFont(const char* font);
     
 #endif /** USE_TEXT_MENU */
   RenderContext renderContext;
